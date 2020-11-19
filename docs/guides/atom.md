@@ -36,6 +36,54 @@ console.log(count$.get())
 // 11
 ```
 
+```js title="Observed"
+import { atom, observe } from 'elementos'
+
+const count$ = atom(10, {
+  actions: (set) => ({
+    increment: () => set(prevCount => prevCount + 1)
+  })
+})
+
+observe(count$, (count) => {
+  console.log(count)
+})
+
+count$.actions.increment()
+count$.actions.increment()
+
+// Output:
+// 10
+// 11
+// 12
+```
+
+```js title="onObserverChange"
+import { atom, observe } from 'elementos'
+
+const count$ = atom(10, {
+  actions: (set) => ({
+    increment: () => set(prevCount => prevCount + 1)
+  })
+})
+
+count$.onObserverChange(({ count }) => {
+  console.log(count)
+})
+
+const dispose1 = observe(count$, (count) => {})
+const dispose2 = observe(count$, (count) => {})
+
+dispose1()
+dispose2()
+
+// Output:
+// 1
+// 2
+// 1
+// 0
+```
+
 ## Reference
 
 ### `atom(defaultValue, options)`

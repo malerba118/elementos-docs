@@ -7,15 +7,24 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #8F60F6;
-  --ifm-color-primary-dark: rgb(33, 175, 144);
-  --ifm-color-primary-darker: rgb(31, 165, 136);
-  --ifm-color-primary-darkest: rgb(26, 136, 112);
-  --ifm-color-primary-light: rgb(70, 203, 174);
-  --ifm-color-primary-lighter: rgb(102, 212, 189);
-  --ifm-color-primary-lightest: rgb(146, 224, 208);
+  --ifm-color-primary: #8f60f6;
+  --ifm-color-primary-dark: #7840f4;
+  --ifm-color-primary-darker: #6d2ff3;
+  --ifm-color-primary-darkest: #500de3;
+  --ifm-color-primary-light: #a680f8;
+  --ifm-color-primary-lighter: #b191f9;
+  --ifm-color-primary-lightest: #d3c1fb;
   --ifm-code-font-size: 95%;
-  --ifm-color-success: #58b983;
+  --ifm-color-success: #5ab583;
+}
+
+html[data-theme="dark"] {
+  --ifm-code-background: #242526;
+  --ifm-background-color: #202020 !important;
+}
+
+.footer {
+  --ifm-footer-background-color: #242526;
 }
 
 .docusaurus-highlight-code-line {
@@ -24,7 +33,11 @@
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
 }
-/* 
+
 .prism-code > div {
   background-color: #242526 !important;
-} */
+}
+
+.codeBlockTitle_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock- {
+  background-color: #242526 !important;
+}
