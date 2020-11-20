@@ -5,6 +5,10 @@
  * and scoped locally.
  */
 
+html, body {
+  height: 100%;
+}
+
 .heroBanner {
   padding: 4rem 0;
   text-align: center;

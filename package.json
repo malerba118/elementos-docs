@@ -11,11 +11,15 @@
     "serve": "docusaurus serve"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.0.0",
     "@docusaurus/core": "2.0.0-alpha.66",
     "@docusaurus/preset-classic": "2.0.0-alpha.66",
     "@docusaurus/theme-live-codeblock": "^2.0.0-alpha.66",
+    "@emotion/react": "^11.1.1",
+    "@emotion/styled": "^11.0.0",
     "@mdx-js/react": "^1.5.8",
     "clsx": "^1.1.1",
+    "framer-motion": "^2.9.4",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   },

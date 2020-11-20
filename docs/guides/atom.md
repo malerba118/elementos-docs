@@ -6,8 +6,15 @@ sidebar_label: atom
 
 Atoms are observable state containers at the core of elementos. Atom is a vague/overloaded term in programming, but don't let them scare you, they're basically just little data stores that will notify you when their state has changed.
 
+All state in elementos originates in atoms and then propagates outward via derived values, notifying observers along the way.
+
 ## Examples
-```js title="Simple"
+
+In their simplest form, we may instantiate an atom with only a default value. This will give us one default action, `set` that we may use to update the atom's state. 
+
+### Simple
+
+```js
 import { atom } from 'elementos'
 
 const count$ = atom(10)
@@ -20,7 +27,15 @@ console.log(count$.get())
 // 12
 ```
 
-```js title="Custom Actions"
+:::tip
+When setting an atom's state, we should do so immutably because elementos uses referential equality to memoize values internally. If we mutate state, elementos will not understand that the state has changed and observer effects will fail to run.
+:::
+
+### Custom Actions
+
+Alternatively, we may define custom actions for our atom that restrict the way in which we modify its underlying state.
+
+```js
 import { atom } from 'elementos'
 
 const count$ = atom(10, {
@@ -36,7 +51,11 @@ console.log(count$.get())
 // 11
 ```
 
-```js title="Observed"
+### Observation
+
+Atoms would be pretty useless without a way to observe them and run effects againt their state changes. `observe` let's us run effects when the atom's previous state and new state are not referentially equal (compared via `Object.is`).
+
+```js
 import { atom, observe } from 'elementos'
 
 const count$ = atom(10, {
@@ -58,7 +77,11 @@ count$.actions.increment()
 // 12
 ```
 
-```js title="onObserverChange"
+### onObserverChange
+
+Atoms allow us to hook into information about their observers as well. Whenever an observer subscribes/unsubscribes from an atom, we will become notified via onObserverChange callbacks.
+
+```js
 import { atom, observe } from 'elementos'
 
 const count$ = atom(10, {
@@ -83,24 +106,3 @@ dispose2()
 // 1
 // 0
 ```
-
-## Reference
-
-### `atom(defaultValue, options)`
-
-Creates an observable state container.
-
-#### Parameters
-
-* **`defaultValue`**: **optional** - a default state value.
-* **`options`**: **optional**
-  - **`actions` [default (set) => ({ set })]**: a function in which we can create and return custom actions to mutate the atom state. This provides a nice mechanism to gatekeep our state.
-
-#### Returns
-An atom with the following properties.
-* **`get(selector, transaction)`**: - a method to get the state of the atom.
-  - **`selector` optional [default (x) => x]**: a selector function to select only a subset of the state
-  -  **`transaction` optional**: if a transaction is pending, you may get the draft state associated with the transaction by passing it here. This is a low level concept, so you likely will not need it.
-* **`subscribe`**: this is a low level function, please use `observe` instead if you wish to run an effect when the atom state changes.
-* **`actions`**: the actions returned by the actions option.
-  

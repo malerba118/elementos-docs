@@ -40,7 +40,7 @@ count$.actions.set(prev => prev + 1)
 
 :::tip
 
-What's up with the `$` at the end of `count$`? This is known as [Finnish Notation](https://medium.com/@benlesh/observables-and-finnish-notation-df8356ed1c9b) and is sometimes used as a way to name variables that contain observable values. Elementos uses this notation where possible.
+What's up with the `$` at the end of `count$`? This is known as [Finnish Notation](https://medium.com/@benlesh/observables-and-finnish-notation-df8356ed1c9b) and is sometimes used to name variables that contain observable values. Elementos uses this notation where possible.
 
 :::
 

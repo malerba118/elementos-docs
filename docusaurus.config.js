@@ -8,6 +8,7 @@ module.exports = {
   organizationName: 'facebook', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
   themes: ['@docusaurus/theme-live-codeblock'],
+  stylesheets: ['https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=block'],
   themeConfig: {
     navbar: {
       title: '',
