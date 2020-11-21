@@ -12,27 +12,29 @@ import { Editor } from '../components'
 const exampleCode = `import { atom } from 'elementos'
 
 export const createWindowSize$ = () => {
-  const size$ = atom(null)
-  let listener
-
+  const size$ = atom(null);
+  let listener;
   size$.onObserverChange(({ count }) => {
     // if there are no observers, remove listener
     if (count === 0 && listener) {
-      window.removeEventListener('resize', listener)
+      window.removeEventListener("resize", listener);
     } else if (count > 0 && !listener) {
+      size$.actions.set({
+        height: window.innerHeight,
+        width: window.innerWidth
+      });
       // if there are observers, add listener
       listener = () => {
         size$.actions.set({
           height: window.innerHeight,
           width: window.innerWidth
-        })
-      }
-      window.addEventListener('resize', listener)
+        });
+      };
+      window.addEventListener("resize", listener);
     }
-  })
-
-  return size$
-}`;
+  });
+  return size$;
+};`;
 
 const dialogCode = `import { atom, molecule, batched, observe } from 'elementos'
 
@@ -137,7 +139,7 @@ function Home() {
             <Stack pb={12} flex="16" spacing={3} width={['100%', 'auto']}>
               <Heading size="xl">Track browser events</Heading>
               <Text fontSize="lg">Easily tap into browser api's like window resize events and create observables that automatically subscribe/unsubscribe listeners as needed.</Text>
-              <Button w={220} colorScheme="purple" as={Link} to="/docs">Open in CodeSandbox</Button>
+              <Button w={220} colorScheme="purple" as={Link} to="https://codesandbox.io/s/elementos-window-size-jyuin?file=/src/index.js">Open in CodeSandbox</Button>
             </Stack>
             <Box flex="24" width={['100%', '100%',  'auto']}>
               <Editor code={exampleCode}/>
