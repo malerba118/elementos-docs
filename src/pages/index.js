@@ -34,6 +34,50 @@ export const createWindowSize$ = () => {
   return size$
 }`;
 
+const dialogCode = `import { atom, molecule, batched, observe } from 'elementos'
+
+const createVisibility$ = (defaultValue: boolean) => {
+  return atom(defaultValue, {
+    actions: (set) => ({
+      open: () => set(true),
+      close: () => set(false)
+    })
+  })
+}
+
+export const createDialog$ = ({
+  defaultVisibility = false,
+  defaultContext = null
+}: = {}) => {
+  const visibility$ = createVisibility$(defaultVisibility)
+  const context$ = atom(defaultContext)
+
+  const dialog$ = molecule(
+    {
+      visibility: visibility$,
+      context: context$
+    },
+    {
+      actions: ({ visibility, context }) => ({
+        open: batched((nextContext: Context) => {
+          context.actions.set(nextContext)
+          visibility.actions.open()
+        }),
+        close: batched(() => {
+          context.actions.set(null)
+          visibility.actions.close()
+        })
+      }),
+      deriver: ({ visibility, context }) => ({
+        isOpen: visibility,
+        context
+      })
+    }
+  )
+
+  return dialog$
+}`
+
 function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
@@ -42,36 +86,42 @@ function Home() {
       <Layout
         title={`Hello from ${siteConfig.title}`}
         description="Description will go into a meta tag in <head />">
-          <Stack bg="white" spacing={8} p={16} align="flex-start">
+          <Stack bg="white"  align="center"  p={16}>
+            <Box mb={8}>
               <img src="img/logo.svg" />
+            </Box>
+            <Stack w="70%" minW="380px" spacing={8}>
               <Heading size="3xl">The next generation of react hooks</Heading>
               <Text fontSize="xl">Elementos is a framework-agnostic reactive state management library with an emphasis on state composability and encapsulation. In elementos, state is modeled as a graph of observable state nodes. Try clicking the nodes below and watch as state changes propagate through the graph.</Text>
-              <Button as={Link} to="/docs">See the docs</Button>
+              <Button colorScheme="purple" w={140} as={Link} to="/docs">See the docs</Button>
+            </Stack>
+          </Stack>
+          <Box w="100%">
               <iframe src="https://codesandbox.io/embed/cytoscape-demo-forked-rj787?fontsize=14&hidenavigation=1&theme=dark"
-     style={{width:'100%', height: '600px', border:0, borderRadius: 4, overflow:'hidden'}}
+     style={{width:'100%', height: '700px', border:0, overflow:'hidden'}}
      title="cytoscape demo (forked)"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
    ></iframe>
-          </Stack>
-          <Stack bg="#f2ecff" isInline w="100%" p={16} spacing={12}>
-            <Stack w="45%" spacing={2}>
-              <Heading size="xl">Track browser api events</Heading>
+          </Box>
+          <Stack bg="#f2ecff" isInline w="100%" p={16} spacing={[0,0, 12]} wrap="wrap" justify="center">
+            <Stack pb={12} flex="16" spacing={2} width={['100%', 'auto']}>
+              <Heading size="xl">Track browser events</Heading>
               <Text fontSize="lg">Easily tap into browser api's like window resize events and create observables that automatically subscribe/unsubscribe listeners as needed.</Text>
               <Button w={220} colorScheme="purple" as={Link} to="/docs">Open in CodeSandbox</Button>
             </Stack>
-            <Box w="55%">
+            <Box flex="24" width={['100%', '100%',  'auto']}>
               <Editor code={exampleCode}/>
             </Box>
           </Stack>
-          <Stack bg="white" isInline w="100%" p={16} spacing={12}>
-            <Box w="55%">
-              <Editor code={exampleCode}/>
+          <Stack bg="white" isInline w="100%" p={16} spacing={[0, 0, 12]} wrap="wrap" justify="center">
+            <Box flex="24" width={['100%', '100%', 'auto']}>
+              <Editor code={dialogCode}/>
             </Box>
-            <Stack w="45%" spacing={2}>
-              <Heading size="xl">Track browser api events</Heading>
-              <Text fontSize="lg">Easily tap into browser api's like window resize events and create observables that automatically subscribe/unsubscribe listeners as needed.</Text>
-              <Button my={2} w={220} colorScheme="purple" as={Link} to="/docs">Open in CodeSandbox</Button>
+            <Stack pt={[12, 12, 0]} flex="16" spacing={2} width={['100%', 'auto']}>
+              <Heading size="xl">Manage dialog state</Heading>
+              <Text fontSize="lg">Create abstractions for common state needs like dialog visibility, requests, and pagination.</Text>
+              <Button w={220} colorScheme="purple" as={Link} to="/docs">Open in CodeSandbox</Button>
             </Stack>
           </Stack>
       </Layout>
