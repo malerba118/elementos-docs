@@ -10,9 +10,9 @@ All state in elementos originates in atoms and then propagates outward via deriv
 
 ## Examples
 
-In their simplest form, we may instantiate an atom with only a default value. This will give us one default action, `set` that we may use to update the atom's state. 
-
 ### Simple
+
+In their simplest form, we may instantiate an atom with only a default value. This will give us one default action, `set` that we may use to update the atom's state. 
 
 ```js
 import { atom } from 'elementos'
@@ -27,8 +27,8 @@ console.log(count$.get())
 // 12
 ```
 
-:::tip
-When setting an atom's state, we should do so immutably because elementos uses referential equality to memoize values internally. If we mutate state, elementos will not understand that the state has changed and observer effects will fail to run.
+:::tip State updates should be immutable
+When setting an atom's state, we should do so immutably because internally elementos uses referential equality to memoize values. If we mutate state, elementos will not understand that the state has changed and observer effects will fail to run.
 :::
 
 ### Custom Actions
@@ -84,11 +84,7 @@ Atoms allow us to hook into information about their observers as well. Whenever 
 ```js
 import { atom, observe } from 'elementos'
 
-const count$ = atom(10, {
-  actions: (set) => ({
-    increment: () => set(prevCount => prevCount + 1)
-  })
-})
+const count$ = atom(10)
 
 count$.onObserverChange(({ count }) => {
   console.log(count)

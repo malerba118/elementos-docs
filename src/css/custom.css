@@ -20,7 +20,7 @@
 
 html[data-theme="dark"] {
   --ifm-code-background: #242526;
-  --ifm-background-color: #202020 !important;
+  --ifm-background-color: #181818 !important;
 }
 
 .footer {
@@ -34,10 +34,10 @@ html[data-theme="dark"] {
   padding: 0 var(--ifm-pre-padding);
 }
 
-.prism-code > div {
+/* .prism-code > div {
   background-color: #242526 !important;
 }
 
 .codeBlockTitle_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock- {
   background-color: #242526 !important;
-}
+} */

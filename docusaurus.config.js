@@ -10,6 +10,9 @@ module.exports = {
   themes: ['@docusaurus/theme-live-codeblock'],
   stylesheets: ['https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=block'],
   themeConfig: {
+    prism: {
+      theme: require('prism-react-renderer/themes/vsDark'),
+    },
     navbar: {
       title: '',
       logo: {

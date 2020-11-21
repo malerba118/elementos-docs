@@ -7,8 +7,8 @@ module.exports = {
       'guides/atom',
       'guides/molecule',
       'guides/derived',
-      'guides/batched',
-      'guides/observe'
+      'guides/observe',
+      'guides/batched'
     ],
     React: [
       'react/overview',
