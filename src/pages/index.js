@@ -13,7 +13,7 @@ const exampleCode = `import { atom } from 'elementos'
 
 export const createWindowSize$ = () => {
   const size$ = atom(null)
-  let listener: EventListener
+  let listener
 
   size$.onObserverChange(({ count }) => {
     // if there are no observers, remove listener
@@ -36,7 +36,7 @@ export const createWindowSize$ = () => {
 
 const dialogCode = `import { atom, molecule, batched, observe } from 'elementos'
 
-const createVisibility$ = (defaultValue: boolean) => {
+const createVisibility$ = (defaultValue) => {
   return atom(defaultValue, {
     actions: (set) => ({
       open: () => set(true),
@@ -78,6 +78,35 @@ export const createDialog$ = ({
   return dialog$
 }`
 
+const intervalCode = `import { atom, observe } from 'elementos'
+
+export const createInterval = (
+  initialCallback,
+  interval
+) => {
+  const interval$ = atom(interval)
+  let callback = initialCallback
+
+  const dispose = observe(interval$, (milliseconds) => {
+    const id = setInterval(() => {
+      callback()
+    }, milliseconds)
+    return () => {
+      clearInterval(id)
+    }
+  })
+
+  return {
+    setInterval: (milliseconds) => {
+      interval$.actions.set(milliseconds)
+    },
+    setCallback: (nextCallback => {
+      callback = nextCallback
+    },
+    dispose
+  }
+}`
+
 function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
@@ -104,8 +133,8 @@ function Home() {
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
    ></iframe>
           </Box>
-          <Stack bg="#f2ecff" isInline w="100%" p={16} spacing={[0,0, 12]} wrap="wrap" justify="center">
-            <Stack pb={12} flex="16" spacing={2} width={['100%', 'auto']}>
+          <Stack bg="#f2ecff" isInline w="100%" p={16} spacing={[0,0, 16]} wrap="wrap" justify="center">
+            <Stack pb={12} flex="16" spacing={3} width={['100%', 'auto']}>
               <Heading size="xl">Track browser events</Heading>
               <Text fontSize="lg">Easily tap into browser api's like window resize events and create observables that automatically subscribe/unsubscribe listeners as needed.</Text>
               <Button w={220} colorScheme="purple" as={Link} to="/docs">Open in CodeSandbox</Button>
@@ -114,15 +143,25 @@ function Home() {
               <Editor code={exampleCode}/>
             </Box>
           </Stack>
-          <Stack bg="white" isInline w="100%" p={16} spacing={[0, 0, 12]} wrap="wrap" justify="center">
+          <Stack bg="white" isInline w="100%" p={16} spacing={[0, 0, 16]} wrap="wrap" justify="center">
             <Box flex="24" width={['100%', '100%', 'auto']}>
               <Editor code={dialogCode}/>
             </Box>
-            <Stack pt={[12, 12, 0]} flex="16" spacing={2} width={['100%', 'auto']}>
+            <Stack pt={[12, 12, 0]} flex="16" spacing={3} width={['100%', 'auto']}>
               <Heading size="xl">Manage dialog state</Heading>
               <Text fontSize="lg">Create abstractions for common state needs like dialog visibility, requests, and pagination.</Text>
               <Button w={220} colorScheme="purple" as={Link} to="/docs">Open in CodeSandbox</Button>
             </Stack>
+          </Stack>
+          <Stack bg="#f2ecff" isInline w="100%" p={16} spacing={[0,0, 16]} wrap="wrap" justify="center">
+            <Stack pb={12} flex="16" spacing={3} width={['100%', 'auto']}>
+              <Heading size="xl">Create dynamic intervals</Heading>
+              <Text fontSize="lg">Create dynamic intervals with update-able callbacks and interval times.</Text>
+              <Button w={220} colorScheme="purple" as={Link} to="/docs">Open in CodeSandbox</Button>
+            </Stack>
+            <Box flex="24" width={['100%', '100%',  'auto']}>
+              <Editor code={intervalCode}/>
+            </Box>
           </Stack>
       </Layout>
     </ThemeProvider>

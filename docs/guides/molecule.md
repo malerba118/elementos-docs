@@ -6,9 +6,7 @@ sidebar_label: molecule
 
 Molecules are observables used to aggregate other observables. They are useful to compose together atoms, molecules, and derived observables into higher level apis. 
 
-## Examples
-
-### Simple
+### Basic
 
 In their simplest form, we may instantiate molecules specifying only children observables.
 

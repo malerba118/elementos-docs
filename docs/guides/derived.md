@@ -6,8 +6,6 @@ sidebar_label: derived
 
 Derived values are observable and provide a mapping of one observable to another observable, with a transform applied to the child observable's value. They are useful to transform/select from existing observables.
 
-## Examples
-
 ### Mapping
 
 Derived takes two required params, an observable and a transform.

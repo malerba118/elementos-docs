@@ -8,9 +8,7 @@ Atoms are observable state containers at the core of elementos. Atom is a vague/
 
 All state in elementos originates in atoms and then propagates outward via derived values, notifying observers along the way.
 
-## Examples
-
-### Simple
+### Basic
 
 In their simplest form, we may instantiate an atom with only a default value. This will give us one default action, `set` that we may use to update the atom's state. 
 
