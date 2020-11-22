@@ -12,9 +12,8 @@ module.exports = {
     ],
     React: [
       'react/overview',
-      'react/useInit',
+      'react/useConstructor',
       'react/useObservable',
-      'react/useObservableRef'
     ],
   },
 };

@@ -233,7 +233,7 @@ const userDialog$ = createDialog$()
 observe(userDialog$, ({ isOpen, context }) => {
   console.log({
     isOpen,
-    user: context
+    context
   })
 })
 

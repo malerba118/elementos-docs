@@ -36,7 +36,7 @@ export const createWindowSize$ = () => {
   return size$;
 };`;
 
-const dialogCode = `import { atom, molecule, batched, observe } from 'elementos'
+const dialogCode = `import { atom, molecule, batched } from 'elementos'
 
 const createVisibility$ = (defaultValue) => {
   return atom(defaultValue, {
@@ -50,7 +50,7 @@ const createVisibility$ = (defaultValue) => {
 export const createDialog$ = ({
   defaultVisibility = false,
   defaultContext = null
-}: = {}) => {
+} = {}) => {
   const visibility$ = createVisibility$(defaultVisibility)
   const context$ = atom(defaultContext)
 
@@ -80,34 +80,27 @@ export const createDialog$ = ({
   return dialog$
 }`
 
-const intervalCode = `import { atom, observe } from 'elementos'
+const intervalCode = `import { atom, observe } from "elementos";
 
-export const createInterval = (
-  initialCallback,
-  interval
-) => {
-  const interval$ = atom(interval)
-  let callback = initialCallback
-
+export const createInterval = (initialCallback, interval) => {
+  const interval$ = atom(interval);
+  let callback = initialCallback;
   const dispose = observe(interval$, (milliseconds) => {
     const id = setInterval(() => {
-      callback()
-    }, milliseconds)
+      callback();
+    }, milliseconds);
     return () => {
-      clearInterval(id)
-    }
-  })
-
+      clearInterval(id);
+    };
+  });
   return {
-    setInterval: (milliseconds) => {
-      interval$.actions.set(milliseconds)
-    },
-    setCallback: (nextCallback => {
-      callback = nextCallback
+    setInterval: interval$.actions.set,
+    setCallback: (nextCallback) => {
+      callback = nextCallback;
     },
     dispose
-  }
-}`
+  };
+};`
 
 function Home() {
   const context = useDocusaurusContext();
@@ -129,7 +122,7 @@ function Home() {
           </Stack>
           <Box w="100%">
               <iframe src="https://codesandbox.io/embed/cytoscape-demo-forked-rj787?fontsize=14&hidenavigation=1&theme=dark"
-     style={{width:'100%', height: '700px', border:0, overflow:'hidden'}}
+     style={{width:'100%', height: '700px', border:0, overflow:'hidden', background: '#151515'}}
      title="cytoscape demo (forked)"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
@@ -152,14 +145,14 @@ function Home() {
             <Stack pt={[12, 12, 0]} flex="16" spacing={3} width={['100%', 'auto']}>
               <Heading size="xl">Manage dialog state</Heading>
               <Text fontSize="lg">Create abstractions for common state needs like dialog visibility, requests, and pagination.</Text>
-              <Button w={220} colorScheme="purple" as={Link} to="/docs">Open in CodeSandbox</Button>
+              <Button w={220} colorScheme="purple" as={Link} to="https://codesandbox.io/s/elementos-dialog-state-p02d5">Open in CodeSandbox</Button>
             </Stack>
           </Stack>
           <Stack bg="#f2ecff" isInline w="100%" p={16} spacing={[0,0, 16]} wrap="wrap" justify="center">
             <Stack pb={12} flex="16" spacing={3} width={['100%', 'auto']}>
               <Heading size="xl">Create dynamic intervals</Heading>
               <Text fontSize="lg">Create dynamic intervals with update-able callbacks and interval times.</Text>
-              <Button w={220} colorScheme="purple" as={Link} to="/docs">Open in CodeSandbox</Button>
+              <Button w={220} colorScheme="purple" as={Link} to="https://codesandbox.io/s/elementos-interval-9vfik">Open in CodeSandbox</Button>
             </Stack>
             <Box flex="24" width={['100%', '100%',  'auto']}>
               <Editor code={intervalCode}/>
