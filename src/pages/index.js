@@ -1,15 +1,13 @@
 import React from 'react';
-import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Link from '@docusaurus/Link';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 import { Stack, Heading, Text, Button, Flex, Box } from "@chakra-ui/react"
 import { ThemeProvider } from '../theme/chakra'
 import { Editor } from '../components'
 
-const exampleCode = `import { atom } from 'elementos'
+const windowSizeCode = `import { atom } from 'elementos';
 
 export const createWindowSize$ = () => {
   const size$ = atom(null);
@@ -19,10 +17,6 @@ export const createWindowSize$ = () => {
     if (count === 0 && listener) {
       window.removeEventListener("resize", listener);
     } else if (count > 0 && !listener) {
-      size$.actions.set({
-        height: window.innerHeight,
-        width: window.innerWidth
-      });
       // if there are observers, add listener
       listener = () => {
         size$.actions.set({
@@ -30,6 +24,7 @@ export const createWindowSize$ = () => {
           width: window.innerWidth
         });
       };
+      listener();
       window.addEventListener("resize", listener);
     }
   });
@@ -44,15 +39,12 @@ const createVisibility$ = (defaultValue) => {
       open: () => set(true),
       close: () => set(false)
     })
-  })
-}
+  });
+};
 
-export const createDialog$ = ({
-  defaultVisibility = false,
-  defaultContext = null
-} = {}) => {
-  const visibility$ = createVisibility$(defaultVisibility)
-  const context$ = atom(defaultContext)
+export const createDialog$ = ({ isOpen = false, context = null } = {}) => {
+  const visibility$ = createVisibility$(isOpen);
+  const context$ = atom(context);
 
   const dialog$ = molecule(
     {
@@ -61,13 +53,13 @@ export const createDialog$ = ({
     },
     {
       actions: ({ visibility, context }) => ({
-        open: batched((nextContext: Context) => {
-          context.actions.set(nextContext)
-          visibility.actions.open()
+        open: batched((nextContext) => {
+          context.actions.set(nextContext);
+          visibility.actions.open();
         }),
         close: batched(() => {
-          context.actions.set(null)
-          visibility.actions.close()
+          context.actions.set(null);
+          visibility.actions.close();
         })
       }),
       deriver: ({ visibility, context }) => ({
@@ -75,20 +67,20 @@ export const createDialog$ = ({
         context
       })
     }
-  )
+  );
 
-  return dialog$
-}`
+  return dialog$;
+};`
 
 const intervalCode = `import { atom, observe } from "elementos";
 
 export const createInterval = (initialCallback, interval) => {
   const interval$ = atom(interval);
   let callback = initialCallback;
-  const dispose = observe(interval$, (milliseconds) => {
+  const dispose = observe(interval$, (interval) => {
     const id = setInterval(() => {
       callback();
-    }, milliseconds);
+    }, interval);
     return () => {
       clearInterval(id);
     };
@@ -135,7 +127,7 @@ function Home() {
               <Button w={220} colorScheme="purple" as={Link} to="https://codesandbox.io/s/elementos-window-size-jyuin?file=/src/index.js">Open in CodeSandbox</Button>
             </Stack>
             <Box flex="24" width={['100%', '100%',  'auto']}>
-              <Editor code={exampleCode}/>
+              <Editor code={windowSizeCode}/>
             </Box>
           </Stack>
           <Stack bg="white" isInline w="100%" p={16} spacing={[0, 0, 16]} wrap="wrap" justify="center">

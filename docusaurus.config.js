@@ -1,12 +1,12 @@
 module.exports = {
   title: 'Elementos',
   tagline: 'Composable Reactive State Management',
-  url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
+  url: 'https://malerba118.github.io',
+  baseUrl: '/elementos-docs/',
   onBrokenLinks: 'throw',
   favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'malerba118', // Usually your GitHub org/user name.
+  projectName: 'elementos-docs', // Usually your repo name.
   themes: ['@docusaurus/theme-live-codeblock'],
   stylesheets: ['https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=block'],
   themeConfig: {
@@ -27,47 +27,43 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Style Guide',
+              label: 'elementos',
               to: 'docs/',
             },
             {
-              label: 'Second Doc',
-              to: 'docs/doc2/',
+              label: 'elementos-react',
+              to: 'docs/react/overview',
             },
           ],
         },
         {
-          title: 'Community',
+          title: 'Github',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'elementos',
+              href: 'https://github.com/malerba118/elementos',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
-            },
+              label: 'elementos-react',
+              href: 'https://github.com/malerba118/elementos-react',
+            }
           ],
         },
         {
-          title: 'More',
+          title: 'NPM',
           items: [
             {
-              label: 'Blog',
-              to: 'blog',
+              label: 'elementos',
+              href: 'https://www.npmjs.com/package/elementos',
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
+              label: 'elementos-react',
+              href: 'https://www.npmjs.com/package/elementos-react',
+            }
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Austin Malerba. Built with Docusaurus.`,
     },
   },
   presets: [

@@ -22,6 +22,12 @@ React encourages us to put our business logic in the render function of our comp
 
 ## React with elementos
 
+### Installation
+
+```bash
+npm install --save elementos-react
+```
+
 Here's a quick look at how we can use React and elementos together. If you're looking for a more in-depth example, please see the notes app built with React and elementos.
 
 ### Local State
@@ -108,7 +114,7 @@ function LoginForm(props) {
 ```
 
 ### Effects
-To achieve effects with elementos, we can set up observers in the constructor function to monitor observables and run effects whenever their values change.
+To achieve effects with elementos, we can set up observers in the constructor function to monitor observables and run effects whenever their values change. Note that the `observe` function returns a disposer which we schedule to run when the component unmounts.
 
 ```js
 import React from 'react';
@@ -187,6 +193,9 @@ function LoginForm(props) {
 }
 ```
 
+:::tip Disposing Observers
+We should take care to dispose of any observers before the component unmounts. The constructor takes a `beforeUnmount` argument that let's use queue disposal functions.
+:::
 
 ### Refs
 Who needs refs when you've got atoms? Because refs are essentially just state that doesn't cause a component to re-rerender, atoms are a natural substitute for refs with the added benefit that they're observable.

@@ -15,5 +15,12 @@ module.exports = {
       'react/useConstructor',
       'react/useObservable',
     ],
+    Examples: [
+      'examples/request',
+      'examples/dialog',
+      'examples/interval',
+      'examples/window-size',
+      'examples/notes-app',
+    ],
   },
 };

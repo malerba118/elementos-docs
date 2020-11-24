@@ -32,7 +32,8 @@ function Username(props) {
       value={username} 
       onChange={(e) => {
         self.username$.actions.set(e.target.value)
-      }}>
+      }}
+    />
   );
 }
 ```
