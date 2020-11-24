@@ -123,33 +123,33 @@ function Home() {
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
    ></iframe>
           </Box>
-          <Stack bg="#EDF2F7" isInline w="100%" p={16} spacing={[0,0, 16]} wrap="wrap" justify="center">
-            <Stack pb={12} flex="16" spacing={3} width={['100%', 'auto']}>
+          <Stack bg="#EDF2F7" p={[6, 6, 16]} direction={['column', 'column', "row"]} spacing={[6, 6, 16]}>
+            <Stack flex="16">
               <Heading size="xl">Track browser events</Heading>
               <Text fontSize="lg">Easily tap into browser api's like window resize events and create observables that automatically subscribe/unsubscribe listeners as needed.</Text>
               <Button w={220} colorScheme="purple" as={Link} to="https://codesandbox.io/s/elementos-window-size-jyuin?file=/src/index.js">Open in CodeSandbox</Button>
             </Stack>
-            <Box flex="24" width={['100%', '100%',  'auto']}>
+            <Box flex="24" overflow="auto">
               <Editor code={windowSizeCode}/>
             </Box>
           </Stack>
-          <Stack bg="white" isInline w="100%" p={16} spacing={[0, 0, 16]} wrap="wrap" justify="center">
-            <Box flex="24" width={['100%', '100%', 'auto']}>
+          <Stack bg="white" p={[6, 6, 16]} direction={['column', 'column', "row"]} spacing={[6, 6, 16]}>
+            <Box flex="24" overflow="auto">
               <Editor code={dialogCode}/>
             </Box>
-            <Stack pt={[12, 12, 0]} flex="16" spacing={3} width={['100%', 'auto']}>
+            <Stack flex="16">
               <Heading size="xl">Manage dialog state</Heading>
               <Text fontSize="lg">Create abstractions for common state needs like dialog visibility, requests, and pagination.</Text>
               <Button w={220} colorScheme="purple" as={Link} to="https://codesandbox.io/s/elementos-dialog-state-p02d5">Open in CodeSandbox</Button>
             </Stack>
           </Stack>
-          <Stack bg="#EDF2F7" isInline w="100%" p={16} spacing={[0,0, 16]} wrap="wrap" justify="center">
-            <Stack pb={12} flex="16" spacing={3} width={['100%', 'auto']}>
+          <Stack bg="#EDF2F7" p={[6, 6, 16]} direction={['column', 'column', "row"]} spacing={[6, 6, 16]}>
+            <Stack flex="16">
               <Heading size="xl">Create dynamic intervals</Heading>
               <Text fontSize="lg">Create dynamic intervals with update-able callbacks and interval times.</Text>
               <Button w={220} colorScheme="purple" as={Link} to="https://codesandbox.io/s/elementos-interval-9vfik">Open in CodeSandbox</Button>
             </Stack>
-            <Box flex="24" width={['100%', '100%',  'auto']}>
+            <Box flex="24" overflow="auto">
               <Editor code={intervalCode}/>
             </Box>
           </Stack>
