@@ -103,7 +103,7 @@ function Home() {
         title={`${siteConfig.title}`}
         description="Composable reactive state management library.">
           <Stack bg="white"  align="center"  p={16}>
-            <Box mb={8}>
+            <Box mb={8} display={['none', 'none', 'block']}>
               <img src="img/logo.svg" />
             </Box>
             <Stack w="70%" minW="380px" spacing={8}>
