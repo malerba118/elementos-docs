@@ -123,7 +123,7 @@ function Home() {
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
    ></iframe>
           </Box>
-          <Stack bg="#f2ecff" isInline w="100%" p={16} spacing={[0,0, 16]} wrap="wrap" justify="center">
+          <Stack bg="#EDF2F7" isInline w="100%" p={16} spacing={[0,0, 16]} wrap="wrap" justify="center">
             <Stack pb={12} flex="16" spacing={3} width={['100%', 'auto']}>
               <Heading size="xl">Track browser events</Heading>
               <Text fontSize="lg">Easily tap into browser api's like window resize events and create observables that automatically subscribe/unsubscribe listeners as needed.</Text>
@@ -143,7 +143,7 @@ function Home() {
               <Button w={220} colorScheme="purple" as={Link} to="https://codesandbox.io/s/elementos-dialog-state-p02d5">Open in CodeSandbox</Button>
             </Stack>
           </Stack>
-          <Stack bg="#f2ecff" isInline w="100%" p={16} spacing={[0,0, 16]} wrap="wrap" justify="center">
+          <Stack bg="#EDF2F7" isInline w="100%" p={16} spacing={[0,0, 16]} wrap="wrap" justify="center">
             <Stack pb={12} flex="16" spacing={3} width={['100%', 'auto']}>
               <Heading size="xl">Create dynamic intervals</Heading>
               <Text fontSize="lg">Create dynamic intervals with update-able callbacks and interval times.</Text>
