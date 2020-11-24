@@ -200,6 +200,8 @@ We should take care to dispose of any observers before the component unmounts. T
 ### Refs
 Who needs refs when you've got atoms? Because refs are essentially just state that doesn't cause a component to re-rerender, atoms are a natural substitute for refs with the added benefit that they're observable.
 
+[Open in CodeSandbox](https://codesandbox.io/s/elementos-login-form-p8lsj?file=/src/App.js)
+
 ```js
 import React from 'react';
 import { 
@@ -296,6 +298,8 @@ function LoginForm(props) {
 
 ### Global State
 Global state is easy as well. All we have to do is define our observables outside of our components and then we can use them inside of components to share state across.
+
+[Open in CodeSandbox](https://codesandbox.io/s/elementos-global-state-dbtkk?file=/src/App.js)
 
 ```jsx
 import React from 'react';

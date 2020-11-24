@@ -100,8 +100,8 @@ function Home() {
   return (
     <ThemeProvider>
       <Layout
-        title={`Hello from ${siteConfig.title}`}
-        description="Description will go into a meta tag in <head />">
+        title={`${siteConfig.title}`}
+        description="Composable reactive state management library.">
           <Stack bg="white"  align="center"  p={16}>
             <Box mb={8}>
               <img src="img/logo.svg" />
@@ -109,7 +109,10 @@ function Home() {
             <Stack w="70%" minW="380px" spacing={8}>
               <Heading size="3xl">The next generation of react hooks</Heading>
               <Text fontSize="xl">Elementos is a framework-agnostic reactive state management library with an emphasis on state composability and encapsulation. In elementos, state is modeled as a graph of observable state nodes. Try clicking the nodes below and watch as state changes propagate through the graph.</Text>
-              <Button colorScheme="purple" w={140} as={Link} to="/docs">See the docs</Button>
+              <Stack isInline spacing={4}>
+                <Button colorScheme="purple" w={140} as={Link} to="/docs">See the docs</Button>
+                <Button  as={Link} to="https://github.com/malerba118/elementos">View on GitHub</Button>
+              </Stack>
             </Stack>
           </Stack>
           <Box w="100%">

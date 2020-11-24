@@ -34,6 +34,10 @@ html[data-theme="dark"] {
   padding: 0 var(--ifm-pre-padding);
 }
 
+.footer__title {
+  font-weight: 600;
+}
+
 /* .prism-code > div {
   background-color: #242526 !important;
 }
