@@ -60,7 +60,7 @@ observe(sum$, (sum) => {
   console.log(`Sum is: ${sum}`)
 })
 
-sum$.actions.x.actions.set(5)
+sum$.children.x.actions.set(5)
 
 // Output:
 // Sum is: 7
@@ -110,6 +110,11 @@ observe(visibility$, (isOpen) => {
 
 visibility$.actions.open()
 visibility$.actions.close()
+
+// Output:
+// closed
+// open
+// closed
 ```
 
 ## Batching 
@@ -117,7 +122,7 @@ visibility$.actions.close()
 Updates to atom state happen synchronously, as do the effects run by observers. As a result, the following code will run the observer callback twice during `doubleIncrement`. 
 
 ```js
-import { atom } from 'elementos'
+import { atom, observe } from 'elementos'
 
 const counter$ = atom(0, {
   actions: (set) => {
@@ -150,7 +155,7 @@ counter$.actions.doubleIncrement()
 We can batch updates to ensure the observer callback runs only once after the completion of the batched update.
 
 ```js
-import { atom, batched } from 'elementos'
+import { atom, observe, batched } from 'elementos'
 
 const counter$ = atom(0, {
   actions: (set) => {
@@ -183,8 +188,10 @@ counter$.actions.doubleIncrement()
 
 When we begin to compose all of these things together, we can create some really cool abstractions. Below is a state manager for dialogs that controls dialog visibility and allows for context data to be passed when opening a dialog.
 
+[Open in CodeSandbox](https://codesandbox.io/s/elementos-quickstart-dialog-0m61v?file=/src/index.js)
+
 ```js
-import { atom, molecule, batched } from 'elementos'
+import { atom, molecule, batched } from "elementos";
 
 const createVisibility$ = (defaultValue) => {
   return atom(defaultValue, {
@@ -192,15 +199,15 @@ const createVisibility$ = (defaultValue) => {
       open: () => set(true),
       close: () => set(false)
     })
-  })
-}
+  });
+};
 
-export const createDialog$ = ({
-  defaultVisibility = false,
-  defaultContext = null
+export const createDialog$ = ({ 
+  isOpen = false, 
+  context = null 
 } = {}) => {
-  const visibility$ = createVisibility$(defaultVisibility)
-  const context$ = atom(defaultContext)
+  const visibility$ = createVisibility$(isOpen);
+  const context$ = atom(context);
 
   const dialog$ = molecule(
     {
@@ -209,13 +216,13 @@ export const createDialog$ = ({
     },
     {
       actions: ({ visibility, context }) => ({
-        open: batched((nextContext: Context) => {
-          context.actions.set(nextContext)
-          visibility.actions.open()
+        open: batched((nextContext) => {
+          context.actions.set(nextContext);
+          visibility.actions.open();
         }),
         close: batched(() => {
-          context.actions.set(null)
-          visibility.actions.close()
+          context.actions.set(null);
+          visibility.actions.close();
         })
       }),
       deriver: ({ visibility, context }) => ({
@@ -223,10 +230,10 @@ export const createDialog$ = ({
         context
       })
     }
-  )
+  );
 
-  return dialog$
-}
+  return dialog$;
+};
 
 const userDialog$ = createDialog$()
 
