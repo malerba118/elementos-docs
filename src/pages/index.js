@@ -7,15 +7,16 @@ import { Stack, Heading, Text, Button, Flex, Box } from "@chakra-ui/react"
 import { ThemeProvider } from '../theme/chakra'
 import { Editor } from '../components'
 
-const windowSizeCode = `import { atom } from 'elementos';
+const windowSizeCode = `import { atom } from "elementos";
 
 export const createWindowSize$ = () => {
   const size$ = atom(null);
-  let listener;
+  let listener = null;
   size$.onObserverChange(({ count }) => {
     // if there are no observers, remove listener
     if (count === 0 && listener) {
       window.removeEventListener("resize", listener);
+      listener = null;
     } else if (count > 0 && !listener) {
       // if there are observers, add listener
       listener = () => {
@@ -152,6 +153,13 @@ function Home() {
             <Box flex="24" overflow="auto">
               <Editor code={intervalCode}/>
             </Box>
+          </Stack>
+          <Stack bg="white" p={[6, 6, 16]} spacing={[6, 6, 16]} align="center">
+              <Heading size="3xl">An Elevator Pitch</Heading>
+              <video style={{width: '100%', maxWidth: 1200}} controls>
+                <source src="img/pitch.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
           </Stack>
       </Layout>
     </ThemeProvider>

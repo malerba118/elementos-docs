@@ -28,7 +28,7 @@ React encourages us to put our business logic in the render function of our comp
 npm install --save elementos-react
 ```
 
-Here's a quick look at how we can use React and elementos together. If you're looking for a more in-depth example, please see the notes app built with React and elementos.
+Here's a quick look at how we can use React and elementos together. If you're looking for a more in-depth example, please see the [notes app](/docs/examples/notes-app) built with React and elementos.
 
 ### Local State
 Local state is everywhere in React apps and it's pretty simple with elementos as well. We can initialize and return atoms in a constructor function and then use the `useObservable` hook to translate the observables to react state.
