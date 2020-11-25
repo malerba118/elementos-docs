@@ -155,8 +155,8 @@ function Home() {
             </Box>
           </Stack>
           <Stack bg="white" p={[6, 6, 16]} spacing={[6, 6, 16]} align="center">
-              <Heading size="3xl">An Elevator Pitch</Heading>
-              <video style={{width: '100%', maxWidth: 1200}} controls>
+              <Heading size="3xl" textAlign="center">An Elevator Pitch</Heading>
+              <video style={{width: '100%', maxWidth: 1200, borderRadius: '0.375rem' }} controls>
                 <source src="img/pitch.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
